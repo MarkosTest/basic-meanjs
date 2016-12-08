@@ -5,6 +5,10 @@ var Comment = mongoose.model('Comment');
 var express = require('express');
 var router = express.Router();
 
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
 router.get('/posts', function(req, res, next) {
   Post.find(function(err, posts){
     if(err){
@@ -67,12 +71,6 @@ router.put('/posts/:postParam/comments/:commentParam/upvote', function(req, res,
     res.json(comment);
   });
 });
-
-/* GET home page.
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-*/
 
 router.param('postParam', function(req, res, next, id) {
   var query = Post.findById(id);
